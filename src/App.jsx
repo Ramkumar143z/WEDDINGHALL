@@ -282,7 +282,7 @@ function App() {
           <div className="hero-left reveal reveal-left">
             <div className="subtitle-wrap">
               <span className="line"></span>
-              <span className="subtitle">WHERE DREAMS COME TRUE</span>
+              <span className="subtitle">Destination Weddinghall</span>
             </div>
             
             <h1 className="main-title">
@@ -318,13 +318,7 @@ function App() {
                   <p>Premium Venues</p>
                 </div>
               </div>
-              <div className="stat-item">
-                <Award size={26} className="stat-icon" />
-                <div className="stat-text">
-                  <h3><CountUp end={15} /></h3>
-                  <p>Years of Experience</p>
-                </div>
-              </div>
+
               <div className="stat-item">
                 <Briefcase size={26} className="stat-icon" />
                 <div className="stat-text">
