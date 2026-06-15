@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import { 
-  Calendar, ArrowRight, Gift, Users, Building, 
-  Award, Briefcase, PhoneCall, MessageCircle, 
+  Calendar, ArrowRight, Gift, 
+  PhoneCall, MessageCircle, 
   Armchair, ConciergeBell, Flower2, CalendarDays, HeartHandshake,
-  TreePine, PawPrint, Home, Wind, UtensilsCrossed, CookingPot, Sun, CircleParking, BedDouble, Zap,
+  PawPrint, Wind, CookingPot, CircleParking, Zap,
   Leaf, Globe, Heart, Sprout,
-  Mail, MapPin
+  Mail, MapPin,
+  Tent, Coffee, Sun, Sparkles, Camera, Key,
+  Phone, MailOpen, Navigation,
+  Images, X, ChevronLeft, ChevronRight
 } from 'lucide-react';
 import heroBg1 from './assets/herobgset/bg1.png';
 import heroBg2 from './assets/herobgset/bg2.png';
@@ -18,6 +21,7 @@ import heroBg8 from './assets/herobgset/bg8.png';
 import heroBg9 from './assets/herobgset/bg9.png';
 import heroBg10 from './assets/herobgset/bg10.png';
 import heroBg11 from './assets/herobgset/bg11.png';
+import heroBg12 from './assets/herobgset/bg12.png';
 import bambooGazebo from './assets/bamboo_gazebo.png';
 import weddingImg from './assets/occasions/wedding.png';
 import engagementImg from './assets/occasions/engagement.png';
@@ -31,7 +35,31 @@ import './index.css';
 
 const heroImages = [
   heroBg1, heroBg2, heroBg3, heroBg4, heroBg5,
-  heroBg6, heroBg7, heroBg8, heroBg9, heroBg10, heroBg11
+  heroBg6, heroBg7, heroBg8, heroBg9, heroBg10, heroBg11, heroBg12
+];
+
+const galleryItems = [
+  { src: heroBg1, category: 'hall', title: 'Grand Hall View 1' },
+  { src: heroBg2, category: 'hall', title: 'Grand Hall View 2' },
+  { src: heroBg3, category: 'decor', title: 'Exquisite Decor 1' },
+  { src: heroBg4, category: 'decor', title: 'Exquisite Decor 2' },
+  { src: heroBg5, category: 'hall', title: 'Hall Seating Layout' },
+  { src: heroBg6, category: 'nature', title: 'Lush Gardens' },
+  { src: heroBg7, category: 'nature', title: 'Ecosystem Pathways' },
+  { src: heroBg8, category: 'decor', title: 'Premium Lounge Set' },
+  { src: heroBg9, category: 'hall', title: 'Stage Setup' },
+  { src: heroBg10, category: 'decor', title: 'Lighting & Decor' },
+  { src: heroBg11, category: 'nature', title: 'Sunset Garden View' },
+  { src: heroBg12, category: 'hall', title: 'Grand Venue Hall Set' },
+  { src: bambooGazebo, category: 'nature', title: 'Bamboo Gazebo' },
+  { src: weddingImg, category: 'occasions', title: 'Traditional Wedding' },
+  { src: engagementImg, category: 'occasions', title: 'Elegant Engagement' },
+  { src: birthdayImg, category: 'occasions', title: 'Grand Birthday Party' },
+  { src: haldiImg, category: 'occasions', title: 'Cheerful Haldi' },
+  { src: mehendiImg, category: 'occasions', title: 'Intricate Mehendi' },
+  { src: pubertyImg, category: 'occasions', title: 'Traditional Half-Saree Event' },
+  { src: corporateImg, category: 'occasions', title: 'Corporate Conference' },
+  { src: gettogetherImg, category: 'occasions', title: 'Social Gathering' }
 ];
 
 const BambooIcon = () => (
@@ -133,17 +161,31 @@ const GatheringIcon = () => (
   </svg>
 );
 
+const marqueeFeatures = [
+  { icon: Armchair, title: "LUXURIOUS SPACES", desc: "Beautifully designed venues for grand celebrations." },
+  { icon: ConciergeBell, title: "PREMIUM CATERING", desc: "Exquisite menus crafted by expert chefs." },
+  { icon: Flower2, title: "BESPOKE DECOR", desc: "Custom themes that bring your vision to life." },
+  { icon: CalendarDays, title: "SEAMLESS PLANNING", desc: "End-to-end planning for a stress-free experience." },
+  { icon: HeartHandshake, title: "MEMORABLE EXPERIENCES", desc: "Creating moments you'll cherish forever." },
+  { icon: Leaf, title: "NATURE FRIENDLY", desc: "Lush green surroundings and eco-conscious venue operations." },
+  { icon: PawPrint, title: "PET FRIENDLY", desc: "Welcoming environment for your beloved furry companions." },
+  { icon: Wind, title: "GREEN OXYGEN", desc: "We contribute one lakh oxygen per day." },
+  { icon: Globe, title: "ENVIRONMENT ARCHITECTURE", desc: "Sustainable architectural design harmonized with nature." },
+  { icon: Armchair, title: "PREMIUM OUTDOOR LOUNGE", desc: "Luxurious open-air seating for all your functions." },
+  { icon: CircleParking, title: "AMPLE PARKING", desc: "Ample parking space for 25 cars and 500+ bikes." }
+];
+
 const facilities = [
-  { icon: TreePine, title: "Nature Friendly", desc: "Lush green surroundings for a serene and refreshing celebration.", image: "https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=600&auto=format&fit=crop" },
-  { icon: PawPrint, title: "Pet Friendly", desc: "Your pets are welcome to be a part of your special moments.", image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=600&auto=format&fit=crop" },
-  { icon: Home, title: "Spacious Hall", desc: "Grand and elegant halls designed for your dream celebrations.", image: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=600&auto=format&fit=crop" },
-  { icon: Wind, title: "Indoor AC Hall", desc: "Fully air-conditioned halls with 500+ seating capacity.", image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=600&auto=format&fit=crop" },
-  { icon: UtensilsCrossed, title: "Indoor Dining", desc: "Delicious dining experience with a luxurious ambience.", image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=600&auto=format&fit=crop" },
-  { icon: CookingPot, title: "Kitchen", desc: "Hygienic and fully equipped kitchen for exceptional catering.", image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=600&auto=format&fit=crop" },
-  { icon: Sun, title: "Outdoor Hall", desc: "Beautiful open-air spaces perfect for magical evening events.", image: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=600&auto=format&fit=crop" },
-  { icon: CircleParking, title: "Parking", desc: "Ample parking space for 25 cars and 500+ bikes (up to 1000).", image: "https://images.unsplash.com/photo-1590674899484-d5640e854abe?q=80&w=600&auto=format&fit=crop" },
-  { icon: BedDouble, title: "Guest Rooms", desc: "Comfortable stay with 10 premium AC guest rooms.", image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=600&auto=format&fit=crop" },
-  { icon: Zap, title: "Power Backup", desc: "24x7 power backup with 24x7 generator support.", image: "https://images.unsplash.com/photo-1521618755572-156ae0cdd74d?q=80&w=600&auto=format&fit=crop" }
+  { icon: Wind, title: "Indoor AC Hall", desc: "500+ Seating", image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=600&auto=format&fit=crop" },
+  { icon: Tent, title: "Outdoor lounge", desc: "Mini Open Hall", image: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=600&auto=format&fit=crop" },
+  { icon: Coffee, title: "Indoor Dining", desc: "Leaf Serve 200pack", image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=600&auto=format&fit=crop" },
+  { icon: Sun, title: "Outdoor Buffet lounge", desc: "400 pax", image: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=600&auto=format&fit=crop" },
+  { icon: CircleParking, title: "Parking", desc: "350 Cars + 500 Bikes", image: "https://images.unsplash.com/photo-1590674899484-d5640e854abe?q=80&w=600&auto=format&fit=crop" },
+  { icon: Zap, title: "Power Backup", desc: "24x7 Generator", image: "https://images.unsplash.com/photo-1521618755572-156ae0cdd74d?q=80&w=600&auto=format&fit=crop" },
+  { icon: Sparkles, title: "Mini lounge", desc: "70members", image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=600&auto=format&fit=crop" },
+  { icon: Key, title: "Guest Rooms", desc: "4 Individual rooms + 2 dormitory rooms + Total Occupancy 28 no's", image: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=600&auto=format&fit=crop" },
+  { icon: Camera, title: "Photography Spots", desc: "Lush Green Backdrop", image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop" },
+  { icon: CookingPot, title: "Kitchen", desc: "Catering equipements", image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=600&auto=format&fit=crop" }
 ];
 
 function CountUp({ end, duration = 2000, suffix = "+" }) {
@@ -175,6 +217,46 @@ function App() {
   const [currentBg, setCurrentBg] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+  const [galleryFilter, setGalleryFilter] = useState('all');
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+
+  const filteredGalleryItems = galleryItems.filter(item => 
+    galleryFilter === 'all' || item.category === galleryFilter
+  );
+
+  const handlePrevImage = (e) => {
+    e.stopPropagation();
+    setLightboxIndex((prev) => 
+      prev === 0 ? filteredGalleryItems.length - 1 : prev - 1
+    );
+  };
+
+  const handleNextImage = (e) => {
+    e.stopPropagation();
+    setLightboxIndex((prev) => 
+      prev === filteredGalleryItems.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!isGalleryOpen) return;
+      if (e.key === 'Escape') {
+        if (lightboxIndex !== null) {
+          setLightboxIndex(null);
+        } else {
+          setIsGalleryOpen(false);
+        }
+      } else if (e.key === 'ArrowLeft' && lightboxIndex !== null) {
+        setLightboxIndex(prev => prev === 0 ? filteredGalleryItems.length - 1 : prev - 1);
+      } else if (e.key === 'ArrowRight' && lightboxIndex !== null) {
+        setLightboxIndex(prev => prev === filteredGalleryItems.length - 1 ? 0 : prev + 1);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isGalleryOpen, lightboxIndex, filteredGalleryItems]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -302,31 +384,6 @@ function App() {
                 VIEW PACKAGES <Gift size={18} />
               </button>
             </div>
-
-            <div className="stats-container">
-              <div className="stat-item">
-                <Users size={26} className="stat-icon" />
-                <div className="stat-text">
-                  <h3><CountUp end={500} /></h3>
-                  <p>Happy Couples</p>
-                </div>
-              </div>
-              <div className="stat-item">
-                <Building size={26} className="stat-icon" />
-                <div className="stat-text">
-                  <h3><CountUp end={10} /></h3>
-                  <p>Premium Venues</p>
-                </div>
-              </div>
-
-              <div className="stat-item">
-                <Briefcase size={26} className="stat-icon" />
-                <div className="stat-text">
-                  <h3><CountUp end={50} /></h3>
-                  <p>Expert Team</p>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Right side floating elements */}
@@ -350,40 +407,39 @@ function App() {
       {/* Premium Facilities Section */}
       <section id="facilities" className="facilities">
         {/* Features Strip */}
-        <div className="features-strip reveal reveal-up">
-          <div className="feature-card">
-            <div className="feature-icon"><Armchair size={24} color="#C89B7B" strokeWidth={1.5} /></div>
-            <div className="feature-content">
-              <h4>LUXURIOUS SPACES</h4>
-              <p>Beautifully designed venues for grand celebrations.</p>
+        <div className="features-strip reveal reveal-up active-reveal">
+          <div className="marquee-track">
+            <div className="marquee-group">
+              {marqueeFeatures.map((feat, index) => {
+                const IconComponent = feat.icon;
+                return (
+                  <div key={`feat-1-${index}`} className="feature-card">
+                    <div className="feature-icon">
+                      <IconComponent size={24} color="#C89B7B" strokeWidth={1.5} />
+                    </div>
+                    <div className="feature-content">
+                      <h4>{feat.title}</h4>
+                      <p>{feat.desc}</p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          </div>
-          <div className="feature-card">
-            <div className="feature-icon"><ConciergeBell size={24} color="#C89B7B" strokeWidth={1.5} /></div>
-            <div className="feature-content">
-              <h4>PREMIUM CATERING</h4>
-              <p>Exquisite menus crafted by expert chefs.</p>
-            </div>
-          </div>
-          <div className="feature-card">
-            <div className="feature-icon"><Flower2 size={24} color="#C89B7B" strokeWidth={1.5} /></div>
-            <div className="feature-content">
-              <h4>BESPOKE DECOR</h4>
-              <p>Custom themes that bring your vision to life.</p>
-            </div>
-          </div>
-          <div className="feature-card">
-            <div className="feature-icon"><CalendarDays size={24} color="#C89B7B" strokeWidth={1.5} /></div>
-            <div className="feature-content">
-              <h4>SEAMLESS PLANNING</h4>
-              <p>End-to-end planning for a stress-free experience.</p>
-            </div>
-          </div>
-          <div className="feature-card">
-            <div className="feature-icon"><HeartHandshake size={24} color="#C89B7B" strokeWidth={1.5} /></div>
-            <div className="feature-content">
-              <h4>MEMORABLE EXPERIENCES</h4>
-              <p>Creating moments you'll cherish forever.</p>
+            <div className="marquee-group" aria-hidden="true">
+              {marqueeFeatures.map((feat, index) => {
+                const IconComponent = feat.icon;
+                return (
+                  <div key={`feat-2-${index}`} className="feature-card">
+                    <div className="feature-icon">
+                      <IconComponent size={24} color="#C89B7B" strokeWidth={1.5} />
+                    </div>
+                    <div className="feature-content">
+                      <h4>{feat.title}</h4>
+                      <p>{feat.desc}</p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -400,7 +456,7 @@ function App() {
           {facilities.map((facility, index) => {
             const IconComponent = facility.icon;
             return (
-              <div className="facility-card reveal reveal-up" key={index}>
+              <div className="facility-card" key={index}>
                 <div className="fc-image-container">
                   <img src={facility.image} alt={facility.title} className="fc-image" loading="lazy" />
                 </div>
@@ -443,8 +499,8 @@ function App() {
               NATURE'S GREATEST GIFT
             </span>
             <h2 className="nature-title">
-              <span className="nature-count"><CountUp end={500} duration={3} />++</span>
-              <span className="nature-sub">Bamboo Trees</span>
+              <span className="nature-count">We Contribute</span>
+              <span className="nature-sub">1 Lakh Oxygen / Day</span>
             </h2>
             <div className="nature-title-separator">
               <span className="ns-line"></span>
@@ -822,15 +878,21 @@ function App() {
               <div className="col-line"></div>
               <ul className="footer-contact-info">
                 <li>
-                  <PhoneCall size={16} className="fc-icon" />
+                  <div className="contact-icon-circle">
+                    <Phone size={15} />
+                  </div>
                   <a href="tel:+919655501679">+91 96555 01679</a>
                 </li>
                 <li>
-                  <Mail size={16} className="fc-icon" />
+                  <div className="contact-icon-circle">
+                    <MailOpen size={15} />
+                  </div>
                   <a href="mailto:info@aaravweddinghall.com">info@aaravweddinghall.com</a>
                 </li>
-                <li>
-                  <MapPin size={16} className="fc-icon" />
+                <li className="address-li">
+                  <div className="contact-icon-circle">
+                    <Navigation size={15} strokeWidth={2} />
+                  </div>
                   <p>
                     8/24, Pudhu Thottam, Ramasamy Nagar Extension,<br />
                     Urumandampalayam, Gounder Mills,<br />
@@ -894,6 +956,102 @@ function App() {
               </button>
             </form>
           </div>
+        </div>
+      )}
+
+      {/* Floating Gallery Button */}
+      <button 
+        className="gallery-floating-btn" 
+        onClick={() => { setIsGalleryOpen(true); setGalleryFilter('all'); }}
+        aria-label="Open Gallery"
+      >
+        <Images size={24} />
+        <span className="tooltip-text">View Gallery</span>
+      </button>
+
+      {/* Gallery Modal */}
+      {isGalleryOpen && (
+        <div className="gallery-modal-overlay" onClick={() => setIsGalleryOpen(false)}>
+          <div className="gallery-modal-card" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true" aria-label="Aarav Gallery">
+            <button className="gallery-modal-close" onClick={() => setIsGalleryOpen(false)} aria-label="Close gallery">
+              <X size={20} />
+            </button>
+            
+            <div className="gallery-modal-header">
+              <h3 className="gallery-title">Aarav Gallery</h3>
+              <p className="gallery-subtitle">A visual journey through our premium spaces, gardens and occasions</p>
+            </div>
+            
+            {/* Filter Tabs */}
+            <div className="gallery-filters">
+              {[
+                { id: 'all', label: 'All Photos' },
+                { id: 'hall', label: 'Wedding Hall' },
+                { id: 'decor', label: 'Decorations' },
+                { id: 'nature', label: 'Nature & Gardens' },
+                { id: 'occasions', label: 'Events & Celebrations' }
+              ].map(tab => (
+                <button
+                  key={tab.id}
+                  className={`gallery-filter-btn ${galleryFilter === tab.id ? 'active' : ''}`}
+                  onClick={() => { setGalleryFilter(tab.id); setLightboxIndex(null); }}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+            
+            {/* Photo Grid */}
+            <div className="gallery-grid-container">
+              {filteredGalleryItems.length > 0 ? (
+                <div className="gallery-photo-grid">
+                  {filteredGalleryItems.map((item, idx) => (
+                    <div 
+                      key={idx} 
+                      className="gallery-photo-item"
+                      onClick={() => setLightboxIndex(idx)}
+                    >
+                      <img src={item.src} alt={item.title} loading="lazy" />
+                      <div className="gallery-photo-overlay">
+                        <span className="gallery-photo-category">{item.category.toUpperCase()}</span>
+                        <span className="gallery-photo-title">{item.title}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="gallery-empty">No photos found in this category.</div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Lightbox Modal */}
+      {isGalleryOpen && lightboxIndex !== null && (
+        <div className="lightbox-overlay" onClick={() => setLightboxIndex(null)}>
+          <button className="lightbox-close" onClick={() => setLightboxIndex(null)} aria-label="Close lightbox">
+            <X size={24} />
+          </button>
+          
+          <button className="lightbox-nav btn-prev" onClick={handlePrevImage} aria-label="Previous image">
+            <ChevronLeft size={36} />
+          </button>
+          
+          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <img 
+              src={filteredGalleryItems[lightboxIndex].src} 
+              alt={filteredGalleryItems[lightboxIndex].title} 
+            />
+            <div className="lightbox-caption">
+              <h4>{filteredGalleryItems[lightboxIndex].title}</h4>
+              <p>{filteredGalleryItems[lightboxIndex].category.toUpperCase()}</p>
+            </div>
+          </div>
+          
+          <button className="lightbox-nav btn-next" onClick={handleNextImage} aria-label="Next image">
+            <ChevronRight size={36} />
+          </button>
         </div>
       )}
     </div>
