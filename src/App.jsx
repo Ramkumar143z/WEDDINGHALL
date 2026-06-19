@@ -8,20 +8,17 @@ import {
   Mail, MapPin,
   Tent, Coffee, Sun, Sparkles, Camera, Key,
   Phone, MailOpen, Navigation,
-  Images, X, ChevronLeft, ChevronRight
+  Images, X, ChevronLeft, ChevronRight, Home
 } from 'lucide-react';
-import heroBg1 from './assets/herobgset/bg1.png';
-import heroBg2 from './assets/herobgset/bg2.png';
-import heroBg3 from './assets/herobgset/bg3.png';
-import heroBg4 from './assets/herobgset/bg4.png';
-import heroBg5 from './assets/herobgset/bg5.png';
-import heroBg6 from './assets/herobgset/bg6.png';
-import heroBg7 from './assets/herobgset/bg7.png';
-import heroBg8 from './assets/herobgset/bg8.png';
-import heroBg9 from './assets/herobgset/bg9.png';
-import heroBg10 from './assets/herobgset/bg10.png';
-import heroBg11 from './assets/herobgset/bg11.png';
-import heroBg12 from './assets/herobgset/bg12.png';
+import indoorAcImg from './assets/facilities/Indoor AC Hall.png';
+import indoorDiningImg from './assets/facilities/Indoor Dining.png';
+import miniLoungeImg from './assets/facilities/Mini Lounge.png';
+import outdoorBuffetImg from './assets/facilities/Outdoor Buffet Lounge.png';
+import outdoorLoungeImg from './assets/facilities/Outdoor Lounge.png';
+import parkingImg from './assets/facilities/Parking.png';
+import photographySpotsImg from './assets/facilities/Photography Spots.png';
+const heroImages = Object.values(import.meta.glob('./assets/herobgset/*.png', { eager: true, as: 'url' }));
+
 import bambooGazebo from './assets/bamboo_gazebo.png';
 import weddingImg from './assets/occasions/wedding.png';
 import engagementImg from './assets/occasions/engagement.png';
@@ -33,34 +30,14 @@ import corporateImg from './assets/occasions/corporate.png';
 import gettogetherImg from './assets/occasions/gettogether.png';
 import './index.css';
 
-const heroImages = [
-  heroBg1, heroBg2, heroBg3, heroBg4, heroBg5,
-  heroBg6, heroBg7, heroBg8, heroBg9, heroBg10, heroBg11, heroBg12
-];
 
-const galleryItems = [
-  { src: heroBg1, category: 'hall', title: 'Grand Hall View 1' },
-  { src: heroBg2, category: 'hall', title: 'Grand Hall View 2' },
-  { src: heroBg3, category: 'decor', title: 'Exquisite Decor 1' },
-  { src: heroBg4, category: 'decor', title: 'Exquisite Decor 2' },
-  { src: heroBg5, category: 'hall', title: 'Hall Seating Layout' },
-  { src: heroBg6, category: 'nature', title: 'Lush Gardens' },
-  { src: heroBg7, category: 'nature', title: 'Ecosystem Pathways' },
-  { src: heroBg8, category: 'decor', title: 'Premium Lounge Set' },
-  { src: heroBg9, category: 'hall', title: 'Stage Setup' },
-  { src: heroBg10, category: 'decor', title: 'Lighting & Decor' },
-  { src: heroBg11, category: 'nature', title: 'Sunset Garden View' },
-  { src: heroBg12, category: 'hall', title: 'Grand Venue Hall Set' },
-  { src: bambooGazebo, category: 'nature', title: 'Bamboo Gazebo' },
-  { src: weddingImg, category: 'occasions', title: 'Traditional Wedding' },
-  { src: engagementImg, category: 'occasions', title: 'Elegant Engagement' },
-  { src: birthdayImg, category: 'occasions', title: 'Grand Birthday Party' },
-  { src: haldiImg, category: 'occasions', title: 'Cheerful Haldi' },
-  { src: mehendiImg, category: 'occasions', title: 'Intricate Mehendi' },
-  { src: pubertyImg, category: 'occasions', title: 'Traditional Half-Saree Event' },
-  { src: corporateImg, category: 'occasions', title: 'Corporate Conference' },
-  { src: gettogetherImg, category: 'occasions', title: 'Social Gathering' }
-];
+
+
+const galleryItems = heroImages.map((img, idx) => ({
+  src: img,
+  category: 'hall',
+  title: `Hero Image ${idx + 1}`
+}));
 
 const BambooIcon = () => (
   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -161,6 +138,33 @@ const GatheringIcon = () => (
   </svg>
 );
 
+const occasions = [
+  { title: "Wedding", shortDesc: "Celebrate your big day in a magical setting.", image: weddingImg, Icon: WeddingIcon,
+    popupDesc: "Your dream wedding deserves a dream venue. Our grand hall transforms into a breathtaking celebration space with elegant decor, premium lighting, and world-class amenities. From traditional ceremonies to modern receptions, every detail is curated to perfection.",
+    features: ["Grand Stage Setup", "500+ Guest Capacity", "Bridal Suite Available", "Custom Decor Themes", "Premium Sound & Lighting", "Valet Parking"] },
+  { title: "Engagement", shortDesc: "Mark the beginning of forever with elegance.", image: engagementImg, Icon: EngagementIcon,
+    popupDesc: "Begin your journey of togetherness in a venue that radiates love and elegance. Our beautifully decorated spaces set the perfect tone for your engagement ceremony, with intimate seating, floral arrangements, and stunning backdrops for timeless photos.",
+    features: ["Elegant Stage Decor", "Ring Ceremony Setup", "Photo Backdrop Walls", "Intimate Seating", "Floral Arrangements", "Custom Lighting"] },
+  { title: "Birthday", shortDesc: "Make birthdays extra special with grand celebrations.", image: birthdayImg, Icon: BirthdayIcon,
+    popupDesc: "Whether it's a milestone birthday or an intimate gathering, our versatile spaces transform into the ultimate party zone. From themed decorations to live entertainment areas, we make every birthday a grand affair to remember.",
+    features: ["Theme Decorations", "Cake & Dessert Counter", "DJ & Music Setup", "Kids Play Area", "Balloon Decor", "Photography Corners"] },
+  { title: "Haldi", shortDesc: "Vibrant haldi ceremonies full of laughter and joy.", image: haldiImg, Icon: HaldiIcon,
+    popupDesc: "Embrace the vibrant tradition of Haldi in our beautifully curated outdoor and indoor spaces. With waterproof setups, colorful decor, and ample space for dancing and celebrations, your Haldi ceremony will be nothing short of spectacular.",
+    features: ["Outdoor Garden Setup", "Waterproof Arrangements", "Traditional Decor", "Music & Dance Floor", "Colorful Floral Decor", "Photo Zones"] },
+  { title: "Mehendi", shortDesc: "Vibrant mehendi events to cherish.", image: mehendiImg, Icon: MehendiIcon,
+    popupDesc: "Host a mesmerizing Mehendi function in our lush garden spaces or elegant indoor lounges. With comfortable seating, ambient lighting, and beautiful Rajasthani-inspired decor, your Mehendi evening will be filled with fun, music, and memories.",
+    features: ["Bohemian Decor Theme", "Comfortable Floor Seating", "Ambient String Lights", "Mehendi Artist Space", "Music & Dance Setup", "Snack Counters"] },
+  { title: "Puberty Function\n(Half Saree)", shortDesc: "Traditional celebrations with grace.", image: pubertyImg, Icon: DressIcon,
+    popupDesc: "Celebrate this beautiful milestone with traditional grandeur in our elegantly decorated hall. We offer customized stage setups, traditional decor themes, and a warm ambiance that honors the cultural significance of this special occasion.",
+    features: ["Traditional Stage Setup", "Floral Decorations", "Cultural Decor Themes", "Guest Seating Layout", "Photo & Video Zones", "Catering Services"] },
+  { title: "Corporate Events", shortDesc: "Professional spaces for meetings, conferences & more.", image: corporateImg, Icon: CorporateIcon,
+    popupDesc: "Elevate your corporate events with our state-of-the-art facilities. From boardroom meetings to large-scale conferences and team-building activities, our venue offers professional infrastructure with a touch of premium hospitality.",
+    features: ["Projector & AV Setup", "Conference Seating", "Wi-Fi Enabled", "Breakout Rooms", "Refreshment Service", "Ample Parking"] },
+  { title: "Get Together", shortDesc: "Perfect place for reunions and social gatherings.", image: gettogetherImg, Icon: GatheringIcon,
+    popupDesc: "Reconnect with loved ones in a warm and welcoming environment. Our versatile spaces are perfect for family reunions, alumni meets, community gatherings, and social celebrations of every kind.",
+    features: ["Flexible Layouts", "Indoor & Outdoor Options", "Buffet & Dining Setup", "Music System", "Garden Access", "Kid-Friendly Spaces"] }
+];
+
 const marqueeFeatures = [
   { icon: Armchair, title: "LUXURIOUS SPACES", desc: "Beautifully designed venues for grand celebrations." },
   { icon: ConciergeBell, title: "PREMIUM CATERING", desc: "Exquisite menus crafted by expert chefs." },
@@ -176,16 +180,46 @@ const marqueeFeatures = [
 ];
 
 const facilities = [
-  { icon: Wind, title: "Indoor AC Hall", desc: "500+ Seating", image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=600&auto=format&fit=crop" },
-  { icon: Tent, title: "Outdoor lounge", desc: "Mini Open Hall", image: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=600&auto=format&fit=crop" },
-  { icon: Coffee, title: "Indoor Dining", desc: "Leaf Serve 200pack", image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=600&auto=format&fit=crop" },
-  { icon: Sun, title: "Outdoor Buffet lounge", desc: "400 pax", image: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=600&auto=format&fit=crop" },
-  { icon: CircleParking, title: "Parking", desc: "350 Cars + 500 Bikes", image: "https://images.unsplash.com/photo-1590674899484-d5640e854abe?q=80&w=600&auto=format&fit=crop" },
-  { icon: Zap, title: "Power Backup", desc: "24x7 Generator", image: "https://images.unsplash.com/photo-1521618755572-156ae0cdd74d?q=80&w=600&auto=format&fit=crop" },
-  { icon: Sparkles, title: "Mini lounge", desc: "70members", image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=600&auto=format&fit=crop" },
-  { icon: Key, title: "Guest Rooms", desc: "4 Individual rooms + 2 dormitory rooms + Total Occupancy 28 no's", image: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=600&auto=format&fit=crop" },
-  { icon: Camera, title: "Photography Spots", desc: "Lush Green Backdrop", image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop" },
-  { icon: CookingPot, title: "Kitchen", desc: "Catering equipements", image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=600&auto=format&fit=crop" }
+  { icon: Wind, title: "Indoor AC Hall", desc: "500+ Seating", image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=600&auto=format&fit=crop",
+    popupImage: indoorAcImg,
+    popupDesc: "Our grand Indoor AC Hall is a masterpiece of elegance, featuring state-of-the-art climate control and luxurious interiors. Perfect for weddings, receptions, and large-scale celebrations with comfortable seating for over 500 guests.",
+    highlights: ["Centralized AC", "500+ Seating Capacity", "Premium Sound System", "Stage & Lighting"] },
+  { icon: Tent, title: "Outdoor Lounge", desc: "Mini Open Hall", image: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=600&auto=format&fit=crop",
+    popupImage: outdoorLoungeImg,
+    popupDesc: "An enchanting open-air lounge surrounded by lush greenery, perfect for intimate pre-wedding ceremonies, cocktail parties, and evening celebrations under the stars.",
+    highlights: ["Open Air Setup", "Garden View", "Ambient Lighting", "Flexible Layout"] },
+  { icon: Coffee, title: "Indoor Dining", desc: "Leaf Serve 200pack", image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=600&auto=format&fit=crop",
+    popupImage: indoorDiningImg,
+    popupDesc: "A sophisticated indoor dining area designed for traditional leaf-serve meals. Accommodates up to 200 guests with comfortable seating and an elegant ambiance that complements every feast.",
+    highlights: ["200 Pax Capacity", "Traditional Leaf Serve", "AC Dining", "Hygienic Setup"] },
+  { icon: Sun, title: "Outdoor Buffet Lounge", desc: "400 pax", image: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=600&auto=format&fit=crop",
+    popupImage: outdoorBuffetImg,
+    popupDesc: "A spacious outdoor buffet lounge capable of serving 400 guests at once. Beautifully designed with dedicated buffet counters, live cooking stations, and ample space for a grand dining experience.",
+    highlights: ["400 Pax Capacity", "Live Cooking Stations", "Buffet Counters", "Scenic Ambiance"] },
+  { icon: CircleParking, title: "Parking", desc: "350 Cars + 500 Bikes", image: "https://images.unsplash.com/photo-1590674899484-d5640e854abe?q=80&w=600&auto=format&fit=crop",
+    popupImage: parkingImg,
+    popupDesc: "Expansive parking facilities ensuring a hassle-free experience for all your guests. Our well-organized parking area can accommodate 350 cars and 500 bikes with dedicated security.",
+    highlights: ["350 Car Slots", "500 Bike Slots", "24/7 Security", "Well-Lit Area"] },
+  { icon: Zap, title: "Power Backup", desc: "24x7 Generator", image: "https://images.unsplash.com/photo-1521618755572-156ae0cdd74d?q=80&w=600&auto=format&fit=crop",
+    popupImage: "https://images.unsplash.com/photo-1521618755572-156ae0cdd74d?q=80&w=1200&auto=format&fit=crop",
+    popupDesc: "Never worry about power interruptions during your event. Our robust 24x7 generator backup ensures uninterrupted electricity supply for lighting, sound systems, and all event equipment.",
+    highlights: ["24x7 Availability", "Full Load Backup", "Auto Switchover", "Zero Downtime"] },
+  { icon: Sparkles, title: "Mini Lounge", desc: "70 members", image: miniLoungeImg,
+    popupImage: miniLoungeImg,
+    popupDesc: "An intimate and stylish mini lounge perfect for smaller gatherings, family functions, and private celebrations. Accommodates up to 70 members with a cozy and premium atmosphere.",
+    highlights: ["70 Pax Capacity", "Cozy Interiors", "Private Setting", "Premium Decor"] },
+  { icon: Key, title: "Guest Rooms", desc: "4 Individual rooms + 2 dormitory rooms + Total Occupancy 28 no's", image: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=600&auto=format&fit=crop",
+    popupImage: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?q=80&w=1200&auto=format&fit=crop",
+    popupDesc: "Comfortable and well-furnished guest rooms for your family and VIP guests. Featuring 4 individual rooms and 2 dormitory rooms with a total occupancy of 28 persons, complete with modern amenities.",
+    highlights: ["4 Individual Rooms", "2 Dormitory Rooms", "28 Total Occupancy", "Modern Amenities"] },
+  { icon: Camera, title: "Photography Spots", desc: "Lush Green Backdrop", image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop",
+    popupImage: photographySpotsImg,
+    popupDesc: "Capture your most precious moments at our stunning photography spots. Featuring lush green backdrops, scenic garden pathways, and beautifully curated corners designed for picture-perfect memories.",
+    highlights: ["Lush Green Backdrop", "Scenic Garden Paths", "Golden Hour Spots", "Instagrammable Corners"] },
+  { icon: CookingPot, title: "Kitchen", desc: "Catering equipements", image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=600&auto=format&fit=crop",
+    popupImage: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=1200&auto=format&fit=crop",
+    popupDesc: "A fully equipped commercial kitchen with all the catering equipment your caterers need. Spacious prep areas, industrial burners, and modern facilities to prepare a grand feast for any occasion.",
+    highlights: ["Industrial Equipment", "Spacious Prep Area", "Gas & Electric Setup", "Hygienic Standards"] }
 ];
 
 function CountUp({ end, duration = 2000, suffix = "+" }) {
@@ -220,6 +254,9 @@ function App() {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [galleryFilter, setGalleryFilter] = useState('all');
   const [lightboxIndex, setLightboxIndex] = useState(null);
+  const [facilityPopup, setFacilityPopup] = useState(null);
+  const [eventPopup, setEventPopup] = useState(null);
+  const [activeSection, setActiveSection] = useState('home');
 
   const filteredGalleryItems = galleryItems.filter(item => 
     galleryFilter === 'all' || item.category === galleryFilter
@@ -289,6 +326,29 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['home', 'facilities', 'nature', 'occasions', 'contact'];
+      const scrollPosition = window.scrollY + 220; // offset for the navbar height plus margins
+
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="app-container">
       {/* Header */}
@@ -304,11 +364,11 @@ function App() {
         </div>
         
         <nav className="nav-links">
-          <a href="#home" className="active">HOME</a>
-          <a href="#facilities">FACILITIES</a>
-          <a href="#nature">NATURE</a>
-          <a href="#occasions">OCCASIONS</a>
-          <a href="#contact">CONTACT</a>
+          <a href="#home" className={activeSection === 'home' ? 'active' : ''}>HOME</a>
+          <a href="#facilities" className={activeSection === 'facilities' ? 'active' : ''}>FACILITIES</a>
+          <a href="#nature" className={activeSection === 'nature' ? 'active' : ''}>NATURE</a>
+          <a href="#occasions" className={activeSection === 'occasions' ? 'active' : ''}>OCCASIONS</a>
+          <a href="#contact" className={activeSection === 'contact' ? 'active' : ''}>CONTACT</a>
         </nav>
 
         <div className="nav-actions">
@@ -337,13 +397,12 @@ function App() {
       {/* Drawer Menu */}
       <div className={`drawer ${isMenuOpen ? 'open' : ''}`} role="navigation">
         <nav className="drawer-links">
-          <a href="#home" onClick={() => setIsMenuOpen(false)}>HOME</a>
-          <a href="#facilities" onClick={() => setIsMenuOpen(false)}>FACILITIES</a>
-          <a href="#nature" onClick={() => setIsMenuOpen(false)}>NATURE</a>
-          <a href="#occasions" onClick={() => setIsMenuOpen(false)}>OCCASIONS</a>
-          <a href="#contact" onClick={() => setIsMenuOpen(false)}>CONTACT</a>
+          <a href="#home" className={activeSection === 'home' ? 'active' : ''} onClick={() => setIsMenuOpen(false)}>HOME</a>
+          <a href="#facilities" className={activeSection === 'facilities' ? 'active' : ''} onClick={() => setIsMenuOpen(false)}>FACILITIES</a>
+          <a href="#nature" className={activeSection === 'nature' ? 'active' : ''} onClick={() => setIsMenuOpen(false)}>NATURE</a>
+          <a href="#occasions" className={activeSection === 'occasions' ? 'active' : ''} onClick={() => setIsMenuOpen(false)}>OCCASIONS</a>
+          <a href="#contact" className={activeSection === 'contact' ? 'active' : ''} onClick={() => setIsMenuOpen(false)}>CONTACT</a>
         </nav>
-
       </div>
 
       {/* Hero Section */}
@@ -364,7 +423,7 @@ function App() {
           <div className="hero-left reveal reveal-left">
             <div className="subtitle-wrap">
               <span className="line"></span>
-              <span className="subtitle">Destination Weddinghall</span>
+              <span className="subtitle">Destination Wedding Hall</span>
             </div>
             
             <h1 className="main-title">
@@ -456,7 +515,7 @@ function App() {
           {facilities.map((facility, index) => {
             const IconComponent = facility.icon;
             return (
-              <div className="facility-card" key={index}>
+              <div className="facility-card" key={index} onClick={() => setFacilityPopup(index)}>
                 <div className="fc-image-container">
                   <img src={facility.image} alt={facility.title} className="fc-image" loading="lazy" />
                 </div>
@@ -477,6 +536,53 @@ function App() {
           })}
         </div>
       </section>
+
+      {/* Facility Popup Modal */}
+      {facilityPopup !== null && (() => {
+        const facility = facilities[facilityPopup];
+        const FacIcon = facility.icon;
+        const whatsappMsg = encodeURIComponent(`Hi! I'm interested in knowing more about your "${facility.title}" facility. Could you share more details?`);
+        return (
+          <div className="facility-popup-overlay" onClick={() => setFacilityPopup(null)}>
+            <div className="facility-popup-card" onClick={(e) => e.stopPropagation()}>
+              <button className="facility-popup-close" onClick={() => setFacilityPopup(null)}>
+                <X size={20} />
+              </button>
+              <div className="facility-popup-image-wrapper">
+                <img src={facility.popupImage} alt={facility.title} className="facility-popup-image" />
+                <div className="facility-popup-image-overlay"></div>
+                <div className="facility-popup-image-badge">
+                  <FacIcon size={18} />
+                  <span>{facility.title}</span>
+                </div>
+              </div>
+              <div className="facility-popup-body">
+                <h3 className="facility-popup-title">{facility.title}</h3>
+                <p className="facility-popup-subtitle">{facility.desc}</p>
+                <p className="facility-popup-desc">{facility.popupDesc}</p>
+                <div className="facility-popup-highlights">
+                  {facility.highlights.map((item, i) => (
+                    <span className="facility-popup-tag" key={i}>
+                      <Sparkles size={12} />
+                      {item}
+                    </span>
+                  ))}
+                </div>
+                <a
+                  href={`https://wa.me/919655501679?text=${whatsappMsg}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="facility-popup-whatsapp-btn"
+                >
+                  <MessageCircle size={18} />
+                  <span>Enquire on WhatsApp</span>
+                  <ArrowRight size={16} />
+                </a>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* Nature Section */}
       <section id="nature" className="nature-section">
@@ -590,118 +696,73 @@ function App() {
         </div>
 
         <div className="occasions-grid">
-          <div className="occasion-card reveal reveal-up">
-            <div className="oc-image-container">
-              <img src={weddingImg} alt="Wedding" className="oc-image" loading="lazy" />
-              <div className="oc-icon-badge">
-                <WeddingIcon />
+          {occasions.map((occ, index) => {
+            const OccIcon = occ.Icon;
+            return (
+              <div className="occasion-card reveal reveal-up" key={index} onClick={() => setEventPopup(index)}>
+                <div className="oc-image-container">
+                  <img src={occ.image} alt={occ.title} className="oc-image" loading="lazy" />
+                  <div className="oc-icon-badge">
+                    <OccIcon />
+                  </div>
+                </div>
+                <div className="oc-content">
+                  <h3>{occ.title.includes('\n') ? occ.title.split('\n').map((line, i) => <span key={i}>{line}{i === 0 && <br/>}</span>) : occ.title}</h3>
+                  <p>{occ.shortDesc}</p>
+                  <div className="oc-divider"></div>
+                </div>
               </div>
-            </div>
-            <div className="oc-content">
-              <h3>Wedding</h3>
-              <p>Celebrate your big day in a magical setting.</p>
-              <div className="oc-divider"></div>
-            </div>
-          </div>
-
-          <div className="occasion-card reveal reveal-up">
-            <div className="oc-image-container">
-              <img src={engagementImg} alt="Engagement" className="oc-image" loading="lazy" />
-              <div className="oc-icon-badge">
-                <EngagementIcon />
-              </div>
-            </div>
-            <div className="oc-content">
-              <h3>Engagement</h3>
-              <p>Mark the beginning of forever with elegance.</p>
-              <div className="oc-divider"></div>
-            </div>
-          </div>
-
-          <div className="occasion-card reveal reveal-up">
-            <div className="oc-image-container">
-              <img src={birthdayImg} alt="Birthday" className="oc-image" loading="lazy" />
-              <div className="oc-icon-badge">
-                <BirthdayIcon />
-              </div>
-            </div>
-            <div className="oc-content">
-              <h3>Birthday</h3>
-              <p>Make birthdays extra special with grand celebrations.</p>
-              <div className="oc-divider"></div>
-            </div>
-          </div>
-
-          <div className="occasion-card reveal reveal-up">
-            <div className="oc-image-container">
-              <img src={haldiImg} alt="Haldi" className="oc-image" loading="lazy" />
-              <div className="oc-icon-badge">
-                <HaldiIcon />
-              </div>
-            </div>
-            <div className="oc-content">
-              <h3>Haldi</h3>
-              <p>Vibrant haldi ceremonies full of laughter and joy.</p>
-              <div className="oc-divider"></div>
-            </div>
-          </div>
-
-          <div className="occasion-card reveal reveal-up">
-            <div className="oc-image-container">
-              <img src={mehendiImg} alt="Mehendi" className="oc-image" loading="lazy" />
-              <div className="oc-icon-badge">
-                <MehendiIcon />
-              </div>
-            </div>
-            <div className="oc-content">
-              <h3>Mehendi</h3>
-              <p>Vibrant mehendi events to cherish.</p>
-              <div className="oc-divider"></div>
-            </div>
-          </div>
-
-          <div className="occasion-card reveal reveal-up">
-            <div className="oc-image-container">
-              <img src={pubertyImg} alt="Puberty Function (Half Saree)" className="oc-image" loading="lazy" />
-              <div className="oc-icon-badge">
-                <DressIcon />
-              </div>
-            </div>
-            <div className="oc-content">
-              <h3>Puberty Function<br/>(Half Saree)</h3>
-              <p>Traditional celebrations with grace.</p>
-              <div className="oc-divider"></div>
-            </div>
-          </div>
-
-          <div className="occasion-card reveal reveal-up">
-            <div className="oc-image-container">
-              <img src={corporateImg} alt="Corporate Events" className="oc-image" loading="lazy" />
-              <div className="oc-icon-badge">
-                <CorporateIcon />
-              </div>
-            </div>
-            <div className="oc-content">
-              <h3>Corporate Events</h3>
-              <p>Professional spaces for meetings, conferences & more.</p>
-              <div className="oc-divider"></div>
-            </div>
-          </div>
-
-          <div className="occasion-card reveal reveal-up">
-            <div className="oc-image-container">
-              <img src={gettogetherImg} alt="Get Together" className="oc-image" loading="lazy" />
-              <div className="oc-icon-badge">
-                <GatheringIcon />
-              </div>
-            </div>
-            <div className="oc-content">
-              <h3>Get Together</h3>
-              <p>Perfect place for reunions and social gatherings.</p>
-              <div className="oc-divider"></div>
-            </div>
-          </div>
+            );
+          })}
         </div>
+
+        {/* Event Popup Modal */}
+        {eventPopup !== null && (() => {
+          const occ = occasions[eventPopup];
+          const OccIcon = occ.Icon;
+          const whatsappMsg = encodeURIComponent(`Hi! I'd like to book your venue for a "${occ.title.replace('\n', ' ')}" event. Could you share availability and pricing details?`);
+          return (
+            <div className="event-popup-overlay" onClick={() => setEventPopup(null)}>
+              <div className="event-popup-card" onClick={(e) => e.stopPropagation()}>
+                <button className="event-popup-close" onClick={() => setEventPopup(null)}>
+                  <X size={20} />
+                </button>
+                <div className="event-popup-image-wrapper">
+                  <img src={occ.image} alt={occ.title} className="event-popup-image" />
+                  <div className="event-popup-image-overlay"></div>
+                  <div className="event-popup-image-badge">
+                    <OccIcon />
+                    <span>{occ.title.replace('\n', ' ')}</span>
+                  </div>
+                </div>
+                <div className="event-popup-body">
+                  <h3 className="event-popup-title">{occ.title.replace('\n', ' ')}</h3>
+                  <p className="event-popup-short">{occ.shortDesc}</p>
+                  <p className="event-popup-desc">{occ.popupDesc}</p>
+                  <div className="event-popup-features">
+                    {occ.features.map((feat, i) => (
+                      <span className="event-popup-feature-tag" key={i}>
+                        <Sparkles size={12} />
+                        {feat}
+                      </span>
+                    ))}
+                  </div>
+                  <a
+                    href={`https://wa.me/919655501679?text=${whatsappMsg}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="event-popup-book-btn"
+                  >
+                    <Calendar size={18} />
+                    <span>Book Now via WhatsApp</span>
+                    <ArrowRight size={16} />
+                  </a>
+                </div>
+              </div>
+            </div>
+          );
+        })()}
+
 
         {/* Planning Capsule Bar */}
         <div className="planning-capsule-bar reveal reveal-zoom">
@@ -1054,6 +1115,45 @@ function App() {
           </button>
         </div>
       )}
+
+      {/* Sticky Bottom Navigation Bar for Mobile */}
+      <div className="mobile-bottom-nav">
+        <a 
+          href="#home" 
+          className={`bottom-nav-item ${activeSection === 'home' ? 'active' : ''}`}
+        >
+          <Home size={20} />
+          <span>Home</span>
+        </a>
+        <a 
+          href="#facilities" 
+          className={`bottom-nav-item ${(activeSection === 'facilities' || activeSection === 'nature') ? 'active' : ''}`}
+        >
+          <ConciergeBell size={20} />
+          <span>Facilities</span>
+        </a>
+        <a 
+          href="#occasions" 
+          className={`bottom-nav-item ${activeSection === 'occasions' ? 'active' : ''}`}
+        >
+          <Calendar size={20} />
+          <span>Events</span>
+        </a>
+        <button 
+          onClick={() => { setIsGalleryOpen(true); setGalleryFilter('all'); }}
+          className={`bottom-nav-item ${isGalleryOpen ? 'active' : ''}`}
+        >
+          <Images size={20} />
+          <span>Gallery</span>
+        </button>
+        <a 
+          href="#contact" 
+          className={`bottom-nav-item ${activeSection === 'contact' ? 'active' : ''}`}
+        >
+          <Phone size={20} />
+          <span>Contact</span>
+        </a>
+      </div>
     </div>
   );
 }
