@@ -17,7 +17,41 @@ import outdoorBuffetImg from './assets/facilities/Outdoor Buffet Lounge.png';
 import outdoorLoungeImg from './assets/facilities/Outdoor Lounge.png';
 import parkingImg from './assets/facilities/Parking.png';
 import photographySpotsImg from './assets/facilities/Photography Spots.png';
-const heroImages = Object.values(import.meta.glob('./assets/herobgset/*.png', { eager: true, as: 'url' }));
+import heroBg1 from './assets/herobgset/bg1.png';
+import heroBg3 from './assets/herobgset/bg3.png';
+import heroBg4 from './assets/herobgset/bg4.png';
+import heroBg5 from './assets/herobgset/bg5.png';
+import heroBg6 from './assets/herobgset/bg6.png';
+import heroBg7 from './assets/herobgset/bg7.png';
+import heroBg8 from './assets/herobgset/bg8.png';
+import heroBg10 from './assets/herobgset/bg10.png';
+import heroBg11 from './assets/herobgset/bg11.png';
+import heroBg12 from './assets/herobgset/bg12.png';
+import heroImg from './assets/herobgset/image.png';
+import heroImgCopy from './assets/herobgset/image copy.png';
+import heroImgCopy2 from './assets/herobgset/image copy 2.png';
+import heroImgCopy3 from './assets/herobgset/image copy 3.png';
+import heroImgCopy4 from './assets/herobgset/image copy 4.png';
+import heroImgCopy5 from './assets/herobgset/image copy 5.png';
+
+const heroImages = [
+  heroBg1,
+  heroBg3,
+  heroBg4,
+  heroBg5,
+  heroBg6,
+  heroBg7,
+  heroBg8,
+  heroBg10,
+  heroBg11,
+  heroBg12,
+  heroImg,
+  heroImgCopy,
+  heroImgCopy2,
+  heroImgCopy3,
+  heroImgCopy4,
+  heroImgCopy5,
+];
 
 import bambooGazebo from './assets/bamboo_gazebo.png';
 import weddingImg from './assets/occasions/wedding.png';
