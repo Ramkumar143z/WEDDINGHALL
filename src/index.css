@@ -3162,6 +3162,8 @@ html, body {
   .drawer.open .drawer-links a:nth-child(5) { animation-delay: 0.3s; }
 
   /* Hero */
+  .hero { min-height: 75vh; }
+  .hero-content-wrapper { padding-top: 12vh; }
   .main-title { font-size: 2.2rem; }
   .description { font-size: 0.85rem; }
 
@@ -3205,11 +3207,84 @@ html, body {
   
   /* Contact Form Mobile */
   .contact-title { font-size: 2.2rem; }
+  .contact-items {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.8rem;
+    width: 100%;
+  }
+  .contact-item {
+    flex: 1;
+    min-width: 0;
+    justify-content: flex-start;
+    text-align: center;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .contact-item:nth-child(2) {
+    display: none;
+  }
+  .contact-item .c-icon-circle {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+  }
+  .contact-item .c-text {
+    align-items: center;
+  }
+  .contact-item .c-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.5px;
+  }
+  .contact-item .c-val {
+    font-size: 0.75rem;
+    word-break: break-all;
+  }
+  .contact-item .c-val.address {
+    font-size: 0.7rem;
+    text-align: center;
+    line-height: 1.3;
+  }
+  .contact-item br {
+    display: none;
+  }
   .contact-form-card { padding: 2rem 1.2rem; border-radius: 12px; }
   
   /* Footer */
-  .footer-grid { grid-template-columns: 1fr; gap: 3rem; }
-  .footer-col { width: 100%; }
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem 1rem;
+  }
+  .footer-col {
+    width: 100%;
+  }
+  .brand-col {
+    grid-column: span 2;
+    text-align: center;
+    align-items: center;
+  }
+  .footer-grid .footer-col:nth-child(3) {
+    display: none;
+  }
+  .footer-col h4 {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  .footer-col ul li a {
+    font-size: 0.75rem;
+  }
+  .footer-contact-info li a {
+    font-size: 0.72rem;
+    word-break: break-all;
+  }
+  .footer-contact-info li {
+    font-size: 0.72rem;
+    align-items: center;
+  }
+  .contact-icon-circle {
+    margin: 0 auto;
+  }
   
   /* Horizontal scrollable category filters for gallery */
   .gallery-filters {
